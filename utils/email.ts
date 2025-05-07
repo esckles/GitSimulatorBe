@@ -157,8 +157,8 @@ export const ForgetAccountPasswordEmail = async (user: any) => {
   const pathFile = path.join(__dirname, "../views/forgetaccount.ejs");
   const html = await ejs.renderFile(pathFile, {
     name: user?.name,
-    // otp: user?.otp,
-    // time: user?.otpExpiresAT,
+    otp: user?.otp,
+    time: user?.otpExpiresAT,
     url: URL_value,
   });
   const mailer = {

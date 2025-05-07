@@ -199,8 +199,8 @@ const ForgetAccountPasswordEmail = (user) =>
     );
     const html = yield ejs_1.default.renderFile(pathFile, {
       name: user === null || user === void 0 ? void 0 : user.name,
-      // otp: user?.otp,
-      // time: user?.otpExpiresAT,
+      otp: user?.otp,
+      time: user?.otpExpiresAT,
       url: URL_value,
     });
     const mailer = {
