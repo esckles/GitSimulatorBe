@@ -78,16 +78,17 @@ export const CreateAccountPasswordEmail = async (user: any) => {
   // );
   // const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
   const id = user?._id;
-  const URL_value = `https://gitsimulator-fe.web.app/auth/otp/${id}`;
+  // const URL_value = `/auth/otp/${id}`;
 
   // const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
-  // const FRONTEND_URL =
-  //   process.env.NODE_ENV === "development"
-  //     ? process.env.FRONTEND_DEV_URL
-  //     : process.env.FRONTEND_PROD_URL;
+  const FRONTEND_URL =
+    process.env.NODE_ENV === "development"
+      ? process.env.FRONTEND_DEV_URL
+      : process.env.FRONTEND_PROD_URL;
 
-  // console.log("ENV:", process.env.NODE_ENV);
-  // const URL_value = `${FRONTEND_URL}/auth/login/${token}`;
+  console.log("ENV:", process.env.NODE_ENV);
+  const URL_value = `${FRONTEND_URL}/auth/otp/${id}`;
+
   const pathFile = path.join(__dirname, "../views/createaccount.ejs");
   const html = await ejs.renderFile(pathFile, {
     name: user?.name,
@@ -123,21 +124,29 @@ export const ForgetAccountPasswordEmail = async (user: any) => {
       accessToken: accessToken,
     },
   });
-
-  const token = jwt.sign(
-    {
-      id: user?._id,
-    },
-    process.env.JWT_SECRET as string,
-    { expiresIn: (process.env.JWT_EXIRES as string, 10) }
-  );
-
+  const id = user?._id;
   const FRONTEND_URL =
     process.env.NODE_ENV === "development"
       ? process.env.FRONTEND_DEV_URL
       : process.env.FRONTEND_PROD_URL;
 
-  const URL_value = `${FRONTEND_URL}/auth/change-ps/${token}`;
+  // console.log("ENV:", process.env.NODE_ENV);
+  const URL_value = `${FRONTEND_URL}/auth/change-ps/${id}`;
+
+  // const token = jwt.sign(
+  //   {
+  //     id: user?._id,
+  //   },
+  //   process.env.JWT_SECRET as string,
+  //   { expiresIn: (process.env.JWT_EXIRES as string, 10) }
+  // );
+
+  // const FRONTEND_URL =
+  //   process.env.NODE_ENV === "development"
+  //     ? process.env.FRONTEND_DEV_URL
+  //     : process.env.FRONTEND_PROD_URL;
+
+  // const URL_value = `${FRONTEND_URL}/auth/change-ps/${token}`;
   // const URL_value =
   //   process.env.NODE_ENV === "development"
   //     ? `http://localhost:5173/auth/change-ps/${token}`

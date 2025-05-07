@@ -6,7 +6,7 @@ import { mainApp } from "./mainApp";
 env.config();
 
 const corsOption = {
-  origin: ["https://gitsimulator-fe.web.app"],
+  origin: ["http://localhost:5173", "https://gitsimulator-fe.web.app"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
