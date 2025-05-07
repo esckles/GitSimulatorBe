@@ -78,7 +78,7 @@ export const CreateAccountPasswordEmail = async (user: any) => {
   // );
   // const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
   const id = user?._id;
-  const URL_value = `https://gitsimulator-fe.web.app/auth/login/${id}`;
+  const URL_value = `https://gitsimulator-fe.web.app/auth/otp/${id}`;
 
   // const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
   // const FRONTEND_URL =
