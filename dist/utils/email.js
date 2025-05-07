@@ -116,13 +116,14 @@ const CreateAccountPasswordEmail = (user) =>
     // const id = user === null || user === void 0 ? void 0 : user._id;
     // const URL_value = `https://gitsimulator-fe.web.app/auth/otp/${id}`;
     const id = user?._id;
-    const FRONTEND_URL =
-      process.env.NODE_ENV === "development"
-        ? process.env.FRONTEND_DEV_URL
-        : process.env.FRONTEND_PROD_URL;
+    const URL_value = `https://gitsimulator-fe.web.app/auth/otp/${id}`;
+    // const FRONTEND_URL =
+    //   process.env.NODE_ENV === "development"
+    //     ? process.env.FRONTEND_DEV_URL
+    //     : process.env.FRONTEND_PROD_URL;
 
-    console.log("ENV:", process.env.NODE_ENV);
-    const URL_value = `${FRONTEND_URL}/auth/otp/${id}`;
+    // console.log("ENV:", process.env.NODE_ENV);
+    // const URL_value = `${FRONTEND_URL}/auth/otp/${id}`;
     // const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
     // const FRONTEND_URL =
     //   process.env.NODE_ENV === "development"
@@ -168,13 +169,14 @@ const ForgetAccountPasswordEmail = (user) =>
       },
     });
     const id = user?._id;
-    const FRONTEND_URL =
-      process.env.NODE_ENV === "development"
-        ? process.env.FRONTEND_DEV_URL
-        : process.env.FRONTEND_PROD_URL;
+    const URL_value = `https://gitsimulator-fe.web.app/auth/change-ps/${id}`;
+    // const FRONTEND_URL =
+    //   process.env.NODE_ENV === "development"
+    //     ? process.env.FRONTEND_DEV_URL
+    //     : process.env.FRONTEND_PROD_URL;
 
     // console.log("ENV:", process.env.NODE_ENV);
-    const URL_value = `${FRONTEND_URL}/auth/change-ps/${id}`;
+    // const URL_value = `${FRONTEND_URL}/auth/change-ps/${id}`;
     // const token = jsonwebtoken_1.default.sign(
     //   {
     //     id: user === null || user === void 0 ? void 0 : user._id,

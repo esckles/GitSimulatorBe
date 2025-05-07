@@ -78,16 +78,16 @@ export const CreateAccountPasswordEmail = async (user: any) => {
   // );
   // const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
   const id = user?._id;
-  // const URL_value = `/auth/otp/${id}`;
+  const URL_value = `https://gitsimulator-fe.web.app/auth/otp/${id}`;
 
-  // const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
-  const FRONTEND_URL =
-    process.env.NODE_ENV === "development"
-      ? process.env.FRONTEND_DEV_URL
-      : process.env.FRONTEND_PROD_URL;
+  // const URL_value = /auth/login/${token}`;
+  // const FRONTEND_URL =
+  //   process.env.NODE_ENV === "development"
+  //     ? process.env.FRONTEND_DEV_URL
+  //     : process.env.FRONTEND_PROD_URL;
 
-  console.log("ENV:", process.env.NODE_ENV);
-  const URL_value = `${FRONTEND_URL}/auth/otp/${id}`;
+  // console.log("ENV:", process.env.NODE_ENV);
+  // const URL_value = `${FRONTEND_URL}/auth/otp/${id}`;
 
   const pathFile = path.join(__dirname, "../views/createaccount.ejs");
   const html = await ejs.renderFile(pathFile, {
@@ -125,13 +125,14 @@ export const ForgetAccountPasswordEmail = async (user: any) => {
     },
   });
   const id = user?._id;
-  const FRONTEND_URL =
-    process.env.NODE_ENV === "development"
-      ? process.env.FRONTEND_DEV_URL
-      : process.env.FRONTEND_PROD_URL;
+  const URL_value = `https://gitsimulator-fe.web.app/auth/change-ps/${id}`;
+  // const FRONTEND_URL =
+  //   process.env.NODE_ENV === "development"
+  //     ? process.env.FRONTEND_DEV_URL
+  //     : process.env.FRONTEND_PROD_URL;
 
   // console.log("ENV:", process.env.NODE_ENV);
-  const URL_value = `${FRONTEND_URL}/auth/change-ps/${id}`;
+  // const URL_value = `${FRONTEND_URL}/auth/change-ps/${id}`;
 
   // const token = jwt.sign(
   //   {
