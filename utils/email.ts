@@ -77,7 +77,7 @@ export const CreateAccountPasswordEmail = async (user: any) => {
     { expiresIn: (process.env.JWT_EXPIRES, 10) }
   );
 
-  const URL_value = "https://gitsimulator-fe.web.app";
+  const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
   // const URL_value =
   //   process.env.PORT === "development"
   //     ? `http://localhost:5173/auth/login/${token}`
@@ -131,7 +131,8 @@ export const ForgetAccountPasswordEmail = async (user: any) => {
   //   process.env.PORT === "development"
   //     ? `http://localhost:5173/auth/change-ps/${token}`
   //     : "https://gitsimulator-fe.web.app";
-  const URL_value = "https://gitsimulator-fe.web.app";
+  // const URL_value = "https://gitsimulator-fe.web.app";
+  const URL_value = `https://gitsimulator-fe.web.app/auth/change-ps/${token}`;
 
   const pathFile = path.join(__dirname, "../views/forgetaccount.ejs");
   const html = await ejs.renderFile(pathFile, {
