@@ -83,6 +83,7 @@ export const CreateAccountPasswordEmail = async (user: any) => {
       ? process.env.FRONTEND_DEV_URL
       : process.env.FRONTEND_PROD_URL;
 
+  console.log("ENV:", process.env.NODE_ENV);
   const URL_value = `${FRONTEND_URL}/auth/login/${token}`;
   const pathFile = path.join(__dirname, "../views/createaccount.ejs");
   const html = await ejs.renderFile(pathFile, {
