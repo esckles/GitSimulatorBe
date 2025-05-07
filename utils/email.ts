@@ -77,14 +77,14 @@ export const CreateAccountPasswordEmail = async (user: any) => {
     { expiresIn: (process.env.JWT_EXPIRES, 10) }
   );
 
-  // const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
-  const FRONTEND_URL =
-    process.env.NODE_ENV === "development"
-      ? process.env.FRONTEND_DEV_URL
-      : process.env.FRONTEND_PROD_URL;
+  const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
+  // const FRONTEND_URL =
+  //   process.env.NODE_ENV === "development"
+  //     ? process.env.FRONTEND_DEV_URL
+  //     : process.env.FRONTEND_PROD_URL;
 
-  console.log("ENV:", process.env.NODE_ENV);
-  const URL_value = `${FRONTEND_URL}/auth/login/${token}`;
+  // console.log("ENV:", process.env.NODE_ENV);
+  // const URL_value = `${FRONTEND_URL}/auth/login/${token}`;
   const pathFile = path.join(__dirname, "../views/createaccount.ejs");
   const html = await ejs.renderFile(pathFile, {
     name: user?.name,
