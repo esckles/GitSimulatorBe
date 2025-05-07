@@ -76,8 +76,9 @@ export const CreateAccountPasswordEmail = async (user: any) => {
     process.env.JWT_SECRET as string,
     { expiresIn: (process.env.JWT_EXPIRES, 10) }
   );
-
   const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
+
+  // const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
   // const FRONTEND_URL =
   //   process.env.NODE_ENV === "development"
   //     ? process.env.FRONTEND_DEV_URL
