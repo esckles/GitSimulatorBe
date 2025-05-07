@@ -207,7 +207,7 @@ const ForgetAccountPasswordEmail = (user) =>
     });
     const mailer = {
       to: user === null || user === void 0 ? void 0 : user.email,
-      from: `<${process.env.GOOGLE_MAIL}>`,
+      from: `"GitSimulator" <${process.env.GOOGLE_MAIL}>`,
       subject: "Reset Password ",
       text: "just text message",
       html,

@@ -98,7 +98,7 @@ export const CreateAccountPasswordEmail = async (user: any) => {
   });
   const mailer = {
     to: user?.email,
-    from: `<${process.env.GOOGLE_MAIL as string}>`,
+    from: `"GitSimulator" <${process.env.GOOGLE_MAIL as string}>`,
     subject: "Account creation",
     text: "just text message",
     html,
@@ -164,7 +164,7 @@ export const ForgetAccountPasswordEmail = async (user: any) => {
   });
   const mailer = {
     to: user?.email,
-    from: `<${process.env.GOOGLE_MAIL as string}>`,
+    from: `"GitSimulator" <${process.env.GOOGLE_MAIL as string}>`,
     subject: "Reset Password ",
     text: "just text message",
     html,
