@@ -5,48 +5,19 @@ import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import userModel from "../model/userModel";
-// import { generateOtp } from "../utils/otp";
+import { generateOtp } from "../utils/otp";
 import {
   CreateAccountPasswordEmail,
   ForgetAccountPasswordEmail,
 } from "../utils/email";
 
-// export const RegisterUserAccount = async (
-//   req: Request,
-//   res: Response
-// ): Promise<Response> => {
-//   try {
-//     const { name, email, password } = req.body;
-//     const { otp } = generateOtp();
-//     const salt = await bcrypt.genSalt(9);
-//     const hashed = await bcrypt.hash(password, salt);
-//     const token = crypto.randomBytes(4).toString("hex");
-//     const user = await userModel.create({
-//       name,
-//       email,
-//       password: hashed,
-//       isVerifiedToken: token,
-//       otp: otp,
-//     });
-//     CreateAccountPasswordEmail(user);
-//     return res.status(201).json({
-//       message: "Account created successfully",
-//       status: 201,
-//       data: user,
-//     });
-//   } catch (error) {
-//     return res
-//       .status(404)
-//       .json({ message: "Error creating account", status: 404 });
-//   }
-// };
 export const RegisterUserAccount = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
   try {
     const { name, email, password } = req.body;
-
+    const { otp } = generateOtp();
     const salt = await bcrypt.genSalt(9);
     const hashed = await bcrypt.hash(password, salt);
     const token = crypto.randomBytes(4).toString("hex");
@@ -55,6 +26,7 @@ export const RegisterUserAccount = async (
       email,
       password: hashed,
       isVerifiedToken: token,
+      otp: otp,
     });
     CreateAccountPasswordEmail(user);
     return res.status(201).json({
@@ -68,47 +40,28 @@ export const RegisterUserAccount = async (
       .json({ message: "Error creating account", status: 404 });
   }
 };
-
-// export const VerifyUserAccount = async (
+// export const RegisterUserAccount = async (
 //   req: Request,
 //   res: Response
 // ): Promise<Response> => {
 //   try {
-//     const { userID } = req.params;
-//     const { otp } = req.body;
+//     const { name, email, password } = req.body;
 
-//     const user = await userModel.findById(userID);
-//     if (user) {
-//       if (user?.otp === otp) {
-//         const otpExpiresAt = new Date(user?.otpExpiresAT);
-//         const currentDate = new Date();
-//         if (currentDate > otpExpiresAt) {
-//           return res.status(404).json({ message: "OTP EXPIRED", status: 404 });
-//         } else {
-//           const updatedUser = await userModel.findByIdAndUpdate(
-//             userID,
-//             {
-//               isVerified: true,
-//               isVerifiedToken: "",
-//               otp: "",
-//               otpExpiresAT: "",
-//             },
-//             { new: true }
-//           );
-//           return res.status(201).json({
-//             message: "Account Verified successfully",
-//             status: 201,
-//             data: updatedUser,
-//           });
-//         }
-//       } else {
-//         return res.status(404).json({ message: "Invalid OTP", status: 404 });
-//       }
-//     } else {
-//       return res
-//         .status(404)
-//         .json({ message: "No account found with such email", status: 404 });
-//     }
+//     const salt = await bcrypt.genSalt(9);
+//     const hashed = await bcrypt.hash(password, salt);
+//     const token = crypto.randomBytes(4).toString("hex");
+//     const user = await userModel.create({
+//       name,
+//       email,
+//       password: hashed,
+//       isVerifiedToken: token,
+//     });
+//     CreateAccountPasswordEmail(user);
+//     return res.status(201).json({
+//       message: "Account created successfully",
+//       status: 201,
+//       data: user,
+//     });
 //   } catch (error) {
 //     return res
 //       .status(404)
@@ -116,29 +69,76 @@ export const RegisterUserAccount = async (
 //   }
 // };
 
-export const VerifyUSerAccount = async (req: Request, res: Response) => {
+export const VerifyUserAccount = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   try {
     const { userID } = req.params;
+    const { otp } = req.body;
 
-    const user = await userModel.findByIdAndUpdate(
-      userID,
-      {
-        isVerified: true,
-        isVerifiedToken: "",
-      },
-      { new: true }
-    );
-    return res.status(201).json({
-      message: "Account verified successfully",
-      status: 201,
-      data: user,
-    });
+    const user = await userModel.findById(userID);
+    if (user) {
+      if (user?.otp === otp) {
+        const otpExpiresAt = new Date(user?.otpExpiresAT);
+        const currentDate = new Date();
+        if (currentDate > otpExpiresAt) {
+          return res.status(404).json({ message: "OTP EXPIRED", status: 404 });
+        } else {
+          const updatedUser = await userModel.findByIdAndUpdate(
+            userID,
+            {
+              isVerified: true,
+              isVerifiedToken: "",
+              otp: "",
+              otpExpiresAT: "",
+            },
+            { new: true }
+          );
+          return res.status(201).json({
+            message: "Account Verified successfully",
+            status: 201,
+            data: updatedUser,
+          });
+        }
+      } else {
+        return res.status(404).json({ message: "Invalid OTP", status: 404 });
+      }
+    } else {
+      return res
+        .status(404)
+        .json({ message: "No account found with such email", status: 404 });
+    }
   } catch (error) {
     return res
       .status(404)
-      .json({ message: "Error verifiying account", status: 404 });
+      .json({ message: "Error creating account", status: 404 });
   }
 };
+
+// export const VerifyUSerAccount = async (req: Request, res: Response) => {
+//   try {
+//     const { userID } = req.params;
+
+//     const user = await userModel.findByIdAndUpdate(
+//       userID,
+//       {
+//         isVerified: true,
+//         isVerifiedToken: "",
+//       },
+//       { new: true }
+//     );
+//     return res.status(201).json({
+//       message: "Account verified successfully",
+//       status: 201,
+//       data: user,
+//     });
+//   } catch (error) {
+//     return res
+//       .status(404)
+//       .json({ message: "Error verifiying account", status: 404 });
+//   }
+// };
 
 export const LoginUserAccount = async (
   req: Request,

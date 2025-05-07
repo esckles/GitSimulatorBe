@@ -69,14 +69,16 @@ export const CreateAccountPasswordEmail = async (user: any) => {
     },
   });
 
-  const token = jwt.sign(
-    {
-      id: user?._id,
-    },
-    process.env.JWT_SECRET as string,
-    { expiresIn: (process.env.JWT_EXPIRES, 10) }
-  );
-  const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
+  // const token = jwt.sign(
+  //   {
+  //     id: user?._id,
+  //   },
+  //   process.env.JWT_SECRET as string,
+  //   { expiresIn: (process.env.JWT_EXPIRES, 10) }
+  // );
+  // const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
+  const id = user?._id;
+  const URL_value = `https://gitsimulator-fe.web.app/auth/login/${id}`;
 
   // const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
   // const FRONTEND_URL =
@@ -89,8 +91,8 @@ export const CreateAccountPasswordEmail = async (user: any) => {
   const pathFile = path.join(__dirname, "../views/createaccount.ejs");
   const html = await ejs.renderFile(pathFile, {
     name: user?.name,
-    // otp: user?.otp,
-    // time: user?.otpExpiresAT,
+    otp: user?.otp,
+    time: user?.otpExpiresAT,
     url: URL_value,
   });
   const mailer = {

@@ -4,7 +4,7 @@ const express_1 = require("express");
 const userController_1 = require("../controller/userController");
 const router = (0, express_1.Router)();
 router.route("/register-account").post(userController_1.RegisterUserAccount);
-router.route("/verify-account/:userID").post(userController_1.VerifyUSerAccount);
+router.route("/verify-account/:userID").post(userController_1.VerifyUserAccount);
 router.route("/login-account").post(userController_1.LoginUserAccount);
 router.route("/readone-account").get(userController_1.ReadOneUserAccount);
 router.route("/readall-account").get(userController_1.ReadAllUserAccount);

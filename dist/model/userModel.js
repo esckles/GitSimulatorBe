@@ -19,11 +19,11 @@ const userModel = new mongoose_1.Schema({
     isVerifiedToken: {
         type: String,
     },
-    // otp: {
-    //   type: String,
-    // },
-    // otpExpiresAT: {
-    //   type: String,
-    // },
+    otp: {
+        type: String,
+    },
+    otpExpiresAT: {
+        type: String,
+    },
 }, { timestamps: true });
 exports.default = (0, mongoose_1.model)("Users", userModel);

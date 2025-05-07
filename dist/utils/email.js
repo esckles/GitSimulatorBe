@@ -73,15 +73,28 @@ const CreateAccountPasswordEmail = (user) => __awaiter(void 0, void 0, void 0, f
             accessToken: accessToken,
         },
     });
-    const token = jsonwebtoken_1.default.sign({
-        id: user === null || user === void 0 ? void 0 : user._id,
-    }, process.env.JWT_SECRET, { expiresIn: (process.env.JWT_EXPIRES, 10) });
-    const URL_value = `http://localhost:5173/auth/login/${token}`;
+    // const token = jwt.sign(
+    //   {
+    //     id: user?._id,
+    //   },
+    //   process.env.JWT_SECRET as string,
+    //   { expiresIn: (process.env.JWT_EXPIRES, 10) }
+    // );
+    // const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
+    const id = user === null || user === void 0 ? void 0 : user._id;
+    const URL_value = `https://gitsimulator-fe.web.app/auth/login/${id}`;
+    // const URL_value = `https://gitsimulator-fe.web.app/auth/login/${token}`;
+    // const FRONTEND_URL =
+    //   process.env.NODE_ENV === "development"
+    //     ? process.env.FRONTEND_DEV_URL
+    //     : process.env.FRONTEND_PROD_URL;
+    // console.log("ENV:", process.env.NODE_ENV);
+    // const URL_value = `${FRONTEND_URL}/auth/login/${token}`;
     const pathFile = node_path_1.default.join(__dirname, "../views/createaccount.ejs");
     const html = yield ejs_1.default.renderFile(pathFile, {
         name: user === null || user === void 0 ? void 0 : user.name,
-        // otp: user?.otp,
-        // time: user?.otpExpiresAT,
+        otp: user === null || user === void 0 ? void 0 : user.otp,
+        time: user === null || user === void 0 ? void 0 : user.otpExpiresAT,
         url: URL_value,
     });
     const mailer = {
@@ -113,7 +126,16 @@ const ForgetAccountPasswordEmail = (user) => __awaiter(void 0, void 0, void 0, f
     const token = jsonwebtoken_1.default.sign({
         id: user === null || user === void 0 ? void 0 : user._id,
     }, process.env.JWT_SECRET, { expiresIn: (process.env.JWT_EXIRES, 10) });
-    const URL_value = `http://localhost:5173/auth/change-ps/${token}`;
+    const FRONTEND_URL = process.env.NODE_ENV === "development"
+        ? process.env.FRONTEND_DEV_URL
+        : process.env.FRONTEND_PROD_URL;
+    const URL_value = `${FRONTEND_URL}/auth/change-ps/${token}`;
+    // const URL_value =
+    //   process.env.NODE_ENV === "development"
+    //     ? `http://localhost:5173/auth/change-ps/${token}`
+    //     : `https://gitsimulator-fe.web.app/auth/change-ps/${token}`;
+    // const URL_value = "https://gitsimulator-fe.web.app";
+    // const URL_value = `https://gitsimulator-fe.web.app/auth/change-ps/${token}`;
     const pathFile = node_path_1.default.join(__dirname, "../views/forgetaccount.ejs");
     const html = yield ejs_1.default.renderFile(pathFile, {
         name: user === null || user === void 0 ? void 0 : user.name,

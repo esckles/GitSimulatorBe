@@ -6,13 +6,14 @@ import {
   ReadAllUserAccount,
   ReadOneUserAccount,
   RegisterUserAccount,
-  VerifyUSerAccount,
+  VerifyUserAccount,
+  // VerifyUSerAccount,
 } from "../controller/userController";
 
 const router: any = Router();
 
 router.route("/register-account").post(RegisterUserAccount);
-router.route("/verify-account/:userID").post(VerifyUSerAccount);
+router.route("/verify-account/:userID").post(VerifyUserAccount);
 router.route("/login-account").post(LoginUserAccount);
 router.route("/readone-account").get(ReadOneUserAccount);
 router.route("/readall-account").get(ReadAllUserAccount);

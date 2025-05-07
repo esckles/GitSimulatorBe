@@ -6,8 +6,8 @@ interface iUser {
   password: string;
   isVerified: boolean;
   isVerifiedToken: string;
-  // otp: string;
-  // otpExpiresAT: string;
+  otp: string;
+  otpExpiresAT: string;
 }
 
 interface iUserData extends iUser, Document {}
@@ -31,12 +31,12 @@ const userModel = new Schema<iUserData>(
     isVerifiedToken: {
       type: String,
     },
-    // otp: {
-    //   type: String,
-    // },
-    // otpExpiresAT: {
-    //   type: String,
-    // },
+    otp: {
+      type: String,
+    },
+    otpExpiresAT: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
